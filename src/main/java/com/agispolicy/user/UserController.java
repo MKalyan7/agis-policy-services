@@ -2,12 +2,10 @@ package com.agispolicy.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,6 +25,15 @@ public class UserController {
     @GetMapping("/policy-api/getusers")
     public List<User> getUsers() {
         return userService.getUsers();
+    }
+    @GetMapping("/policy-api/getUserByUserName")
+    public User  getUserByUserName(@RequestParam String userName) {
+        return userService.getUserByUserName(userName);
+    }
+
+    @PutMapping("/policy-api/updateUser")
+    public void updateUser(@RequestParam String userName,@RequestBody User user) {
+        userService.updateUser(userName,user);
     }
 
 }
